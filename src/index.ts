@@ -1,6 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { z } from "zod";
+import { getEnvironmentInfo } from "./tools/environment.js";
 
 const server = new McpServer({
   name: "xampp-wp-mcp",
@@ -20,6 +20,27 @@ server.registerTool(
         {
           type: "text",
           text: "pong - XAMPP WordPress MCP server is running",
+        },
+      ],
+    };
+  }
+);
+
+server.registerTool(
+  "get_environment_info",
+  {
+    title: "Get Environment Info",
+    description: "Read safe local environment information for the XAMPP WordPress MCP server.",
+    inputSchema: {},
+  },
+  async () => {
+    const info = await getEnvironmentInfo();
+
+    return {
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify(info, null, 2),
         },
       ],
     };
