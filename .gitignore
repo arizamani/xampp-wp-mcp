@@ -41,6 +41,7 @@ Thumbs.db
 .DS_Store
 .AppleDouble
 .LSOverride
+*.bat
 
 # Project specific
 config.local.ts
